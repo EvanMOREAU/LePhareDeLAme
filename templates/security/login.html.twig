@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Page Title</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link href="/res/css/login.css" rel="stylesheet" />
+        <link href="/res/css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="bg-dark d-flex justify-content-center align-items-center vh-100">
+
+        <div class="form-container">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+            <form class="form" method='post'>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="form-group">
+                    <label for="email">Adresse Email</label>
+                    <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="textarea">Mot de passe</label>
+                    <input type="password" name="_password" id="password" autocomplete="current-password" required>
+                </div>
+                <button class="form-submit-btn" type="submit">Connexion</button>
+            </form>
+        </div>
+
+
+
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <input type="checkbox" name="_remember_me" id="_remember_me">
+                    <label for="_remember_me">Remember me</label>
+                </div>
+            #}
+
+    </body>
+</html>

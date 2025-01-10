@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <br>
+    <div class="row">
+        <div class="col d-flex justify-content-start">
+            <a href="{{ path('app_main') }}" class="btn btn-secondary me-2">
+                Retour
+            </a>
+            <button type="submit" class="btn btn-success me-2">
+                {{ button_label|default('Save') }}
+            </button>
+
+        </div>
+    </div>
+{{ form_end(form) }}

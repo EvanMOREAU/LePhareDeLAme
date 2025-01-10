@@ -1,0 +1,733 @@
+{# {% extends 'base.html.twig' %} #}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Le Phare de l'âme</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="res/assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="res/css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="res/assets/img/flag.png  " alt="..." /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#presentation">Présentation</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Parcours</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        {% if app.user %}
+                            <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#adminModal">Gérer</a></li>
+                            <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#changePassword">Changer de mot de passe</a></li>
+                            <li class="nav-item"><a class="nav-link" href='/logout'>Déconnexion</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Le Phare de l'âme</div>
+                <div class="masthead-heading text-uppercase">Ravie de vous rencontrer</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#presentation">En savoir plus</a>
+            </div>
+        </header>
+        <!-- Services-->
+        <section class="page-section" id="presentation">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Que fais-je ?</h2>
+                    <h3 class="section-subheading text-muted">"Votre bien-être est mon objectif"</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa-solid fa-comment fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Communication Défuns</h4>
+                        <p class="text-muted">Offrez-vous la possibilité d'établir un lien avec vos proches disparus. À travers des moments de connexion respectueuse, je vous accompagne pour écouter les messages qu'ils souhaitent transmettre et apaiser votre cœur.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-brain fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Hypnose</h4>
+                        <p class="text-muted">Explorez la puissance de votre esprit pour surmonter les blocages, les peurs ou les habitudes indésirables. Ensemble, nous utilisons l'hypnose pour débloquer votre potentiel et vous accompagner vers un bien-être durable.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-seedling fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Magnétisme</h4>
+                        <p class="text-muted"> Ressentez l'énergie subtile qui circule en vous pour rétablir harmonie et équilibre. Même si les mots manquent parfois pour décrire cette expérience, ses bienfaits parlent d’eux-mêmes. Laissez-vous guider par cette méthode naturelle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Mes services</h2>
+                    <h3 class="section-subheading text-muted">Cliquez sur l'image pour avoir plus de détails</h3>
+                </div>
+                <div class="row">
+                    {% for service in services %}
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <!-- Portfolio item 1-->
+                            <div class="portfolio-item">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{service.id}}">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content"><i class="fas fa-plus fa-1x"></i> Détails</div>
+                                    </div>
+                                    <img class="img-fluid" src="uploads/images/{{service.img}}" alt="..." />
+                                </a>
+                                <div class="portfolio-caption">
+                                    <div class="portfolio-caption-heading">{{service.name}}</div>
+                                    <div class="portfolio-caption-subheading text-muted">{{service.type.type}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-modal modal fade" id="portfolioModal{{service.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="close-modal" data-bs-dismiss="modal"><img src="res/assets/img/close-icon.svg" alt="Close modal" /></div>
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                <div class="modal-body">
+                                                    <!-- Project details-->
+                                                    <h2 class="text-uppercase">{{ service.name }}</h2>
+                                                    <p class="item-intro text-muted">{{service.type.type}}</p>
+                                                    <img class="img-fluid d-block mx-auto" src="uploads/images/{{service.img}}" alt="..." />
+                                                    <p>{{ service.description }}</p>
+                                                    <ul class="list-inline">
+                                                        <li>
+                                                            <strong>Praticien:</strong>
+                                                            Céline GIRON
+                                                        </li>
+                                                        <li>
+                                                            <strong>Prix:</strong>
+                                                            {{ service.price }}€
+                                                        </li>
+                                                    </ul>
+                                                    <button class="btn btn-outline-primary text-uppercase" data-bs-dismiss="modal" type="button">
+                                                        <i class="fas fa-xmark me-1"></i>
+                                                        Fermer
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- About-->
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Mon parcours</h2>
+                    <h3 class="section-subheading text-muted">"Ces dernières années j'ai beaucoup évolué"</h3>
+                </div>
+                <ul class="timeline">
+                    {% for elem in parcours %}
+                        <li class="{% if loop.index is not odd %}timeline-inverted{% endif %}">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="{{ asset('uploads/images/' ~ elem.img) }}" alt="..." /></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>{{ elem.date|date("Y") }}</h4>
+                                    <h4 class="subheading">{{ elem.title }}</h4>
+                                </div>
+                                <div class="timeline-body"><p class="text-muted">{{ elem.description }}</p></div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>
+                                Le futur
+                                <br />
+                                est en 
+                                <br />
+                                chemin...
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Me contacter</h2>
+                    <h3 class="section-subheading text-muted">Envoyez moi un mail pour prendre contact</h3>
+                </div>
+                <form id="contactForm" method="post">
+                    {{ form_start(formContact)}}
+                        <div class="row align-items-stretch mb-5">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!-- Name input-->
+                                    {{ form_widget(formContact.name) }}
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">Veuillez saisir un nom.</div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Email address input-->
+                                    {{ form_widget(formContact.email) }}
+                                    <div class="invalid-feedback" data-sb-feedback="email:required">Adresse email requise.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="email:email">Veuillez saisir une adresse Email valide.</div>
+                                </div>
+                                <div class="form-group mb-md-0">
+                                    <!-- Phone number input-->
+                                    {{ form_widget(formContact.phone) }}
+                                    <div class="invalid-feedback" data-sb-feedback="phone:required">Veuillez saisir un numéro de téléphonne.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-textarea mb-md-0">
+                                    <!-- Message input-->
+                                    {{ form_widget(formContact.message) }}
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Veuillez saisir un message.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center text-white mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                To activate this form, sign up at
+                                <br />
+                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Erreur lors de l'envoi !</div></div>
+                        <!-- Submit Button-->
+                        <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Envoyer le message</button></div>
+                    {{ form_end(formContact)}}
+                </form>
+            </div>
+        </section>
+        {% if app.user %}
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+            <!-- ######################################### Administration ######################################## -->
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+
+            <!-- Modal Administration  -->
+            <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="adminModalLabel">Gestion du site</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card" >
+                            <div class="card-body">
+                                <h5 class="card-title">Services</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">CRUD</h6>
+                                <p class="card-text">D'ici tu pourras gérer l'ensemble des services que tu propose sur ton site.</p>
+                                <button class="btn btn-outline-primary" data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#servicesIndexBackdrop">Accéder</a>
+                            </div>
+                        </div> <br>
+                        <div class="card" >
+                            <div class="card-body">
+                                <h5 class="card-title">Types</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">CRUD</h6>
+                                <p class="card-text">D'ici tu pourras gérer les types, qui pourrons êtres utilisés dans tes différents services.</p>
+                                <button class="btn btn-outline-primary" data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#typesIndexBackdrop">Accéder</a>
+                            </div>
+                        </div> <br>
+                        <div class="card" >
+                            <div class="card-body">
+                                <h5 class="card-title">Parcours</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">CRUD</h6>
+                                <p class="card-text">D'ici tu pourras gérer les différents éléments de la partie "Parcours".</p>
+                                <button class="btn btn-outline-primary" data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#parcoursIndexBackdrop">Accéder</a>
+                            </div>
+                        </div> <br>
+                        <div class="card" >
+                            <div class="card-body">
+                                <h5 class="card-title">Mes prises de contact </h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary"><div class="text-danger">{{ contacts|length() }}</div></h6>
+                                <p class="card-text">Ici tu verras tous les formulaires de contact. Le chiffre en rouge au dessus est le nombre de formulaires enregistrés.</p>
+                                <button class="btn btn-outline-primary" data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#contactIndexBackdrop">Accéder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ############################################# Services ########################################## -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- Modal Index Services -->
+            <div class="modal fade" id="servicesIndexBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Mes services</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            {% for service in services %}
+                                <li class="list-group-item">{{ service.name}} - {{ service.type.type }} 
+                                    <div class="text-end" >
+                                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#servicesDeleteBackdrop{{ service.id }}"><i class="fa-solid fa-trash-can"></i></button>
+                                        <a class="btn btn-outline-primary" href='{{ path('app_service_edit', {'id': service.id}) }}'><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#adminModal">Retour</button>
+                        <button type="button" class="btn btn-success"data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#servicesNewBackdrop"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal New Service -->
+            <div class="modal fade" id="servicesNewBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    {{ form_start(formNewService) }}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="editEmailModalLabel">Modification de votre adresse Email</h1>
+                                <a class="fa-solid fa-xmark" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">Nom:</label>
+                                    {{ form_widget(formNewService.name) }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">description:</label>
+                                    {{ form_widget(formNewService.description) }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">Prix:</label>
+                                    {{ form_widget(formNewService.price) }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">Image:</label>
+                                    {{ form_widget(formNewService.img) }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">Type:</label>
+                                    {{ form_widget(formNewService.type) }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#servicesIndexBackdrop">Retour</button>
+                                <button type="submit" class="btn btn-success" id="submitBtn">Enregistrer</button>
+                            </div>
+                        </div>
+                    {{ form_end(formNewService) }}
+                </div>
+            </div>
+            {% for service in services %}
+                <!-- Modal Index Services -->
+                <div class="modal fade" id="servicesDeleteBackdrop{{ service.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Validation de suppression</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger text-dark" role="alert">
+                                    Cette action est irréversible, lorsque tu cliquereras sur "<i>Valider la suppression</i>" ton service sera définitivement supprimé du site ! 
+                            </div>
+                            <div class="alert alert-info text-dark" role="alert">
+                                    Pour supprimer le service, ré-écris son nom à l'identique ({{ service.name }}) dans la case ci-dessous:
+                                    <input type="text" class="form-control" id="serviceverifdelete{{service.id}}" placeholder="{{ service.name }}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#servicesIndexBackdrop">Retour</button>
+                                <form method="post" action="{{ path('app_main_service_delete', {'id': service.id}) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ service.id) }}">
+                                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Valider la suppression</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Récupérer l'email de l'utilisateur (passée depuis Twig)
+                        const serviceName = "{{ service.name }}";
+                        const serviceInput = document.getElementById('serviceverifdelete{{service.id}}');
+                        const deleteButton = document.querySelector('#servicesDeleteBackdrop{{service.id}} .btn-danger');
+
+                        // Désactiver le bouton "Valider la suppression" par défaut
+                        deleteButton.setAttribute('disabled', 'true');
+
+                        // Ajouter un écouteur d'événements pour détecter les changements dans le champ de saisie
+                        serviceInput.addEventListener('input', function () {
+                        if (serviceInput.value === serviceName) {
+                            // Activer le bouton si l'email correspond
+                            deleteButton.removeAttribute('disabled');
+                        } else {
+                            // Désactiver le bouton si l'email ne correspond pas
+                            deleteButton.setAttribute('disabled', 'true');
+                        }
+                        });
+                    });
+                </script>
+            {% endfor %}
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ################################################# Types ######################################### -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <!-- Modal Index Types -->
+            <div class="modal fade" id="typesIndexBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Mes types de services</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            {% for type in types %}
+                                <li class="list-group-item">{{ type.type }}
+                                    <div class="text-end" >
+                                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#typesDeleteBackdrop{{ type.id }}"><i class="fa-solid fa-trash-can"></i></button>
+                                        <a class="btn btn-outline-primary" href='{{ path('app_type_edit', {'id': type.id}) }}'><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#adminModal">Retour</button>
+                        <button type="button" class="btn btn-success"data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#typesNewBackdrop"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal New Service -->
+            <div class="modal fade" id="typesNewBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    {{ form_start(formNewType) }}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="editEmailModalLabel">Nouveau type de service</h1>
+                                <a class="fa-solid fa-xmark" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">Nom:</label>
+                                    {{ form_widget(formNewType.type) }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#typesIndexBackdrop">Retour</button>
+                                <button type="submit" class="btn btn-success" id="submitBtn">Enregistrer</button>
+                            </div>
+                        </div>
+                    {{ form_end(formNewType) }}
+                </div>
+            </div>
+            {% for type in types %}
+                <!-- Modal Index Services -->
+                <div class="modal fade" id="typesDeleteBackdrop{{ type.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Validation de suppression</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {% if type.getServices()|length() <= 0 %}
+                                    <div class="alert alert-danger text-dark" role="alert">
+                                        Cette action est irréversible, lorsque tu cliquereras sur "<i>Valider la suppression</i>" ton type sera définitivement supprimé du site ! 
+                                    </div>
+                                    <div class="alert alert-info text-dark" role="alert">
+                                        Pour supprimer le type, ré-écris son nom à l'identique ({{ type.type }}) dans la case ci-dessous:
+                                        <input type="text" class="form-control" id="typeverifdelete{{type.id}}" placeholder="{{ type.type }}">
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-danger text-dark" role="alert">
+                                        Tu ne peux pas supprimer ce type car il contient encore des services. Supprime d'abord les services.
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#typesIndexBackdrop">Retour</button>
+                                <form method="post" action="{{ path('app_main_type_delete', {'id': type.id}) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ type.id) }}">
+                                    {% if type.getServices()|length() <= 0 %}
+                                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Valider la suppression</button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Récupérer l'email de l'utilisateur (passée depuis Twig)
+                        const typeName = "{{ type.type }}";
+                        const typeInput = document.getElementById('typeverifdelete{{type.id}}');
+                        const deleteButton = document.querySelector('#typesDeleteBackdrop{{type.id}} .btn-danger');
+
+                        // Désactiver le bouton "Valider la suppression" par défaut
+                        deleteButton.setAttribute('disabled', 'true');
+
+                        // Ajouter un écouteur d'événements pour détecter les changements dans le champ de saisie
+                        typeInput.addEventListener('input', function () {
+                        if (typeInput.value === typeName) {
+                            // Activer le bouton si l'email correspond
+                            deleteButton.removeAttribute('disabled');
+                        } else {
+                            // Désactiver le bouton si l'email ne correspond pas
+                            deleteButton.setAttribute('disabled', 'true');
+                        }
+                        });
+                    });
+                </script>
+            {% endfor %}
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ################################################# Parcour ####################################### -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <!-- Modal Index Types -->
+            <div class="modal fade" id="parcoursIndexBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Mes parcours</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            {% for parcour in parcours %}
+                                <li class="list-group-item">{{ parcour.title }}
+                                    <div class="text-end" >
+                                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#parcoursDeleteBackdrop{{ parcour.id }}"><i class="fa-solid fa-trash-can"></i></button>
+                                        <a class="btn btn-outline-primary" href='{{ path('app_parcour_edit', {'id': parcour.id}) }}'><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#adminModal">Retour</button>
+                        <button type="button" class="btn btn-success"data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#parcoursNewBackdrop"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal New Service -->
+            <div class="modal fade" id="parcoursNewBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    {{ form_start(formNewParcour) }}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="editEmailModalLabel">Nouvel élément de parcour</h1>
+                                <a class="fa-solid fa-xmark" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="email" class="col-form-label">Nom:</label>
+                                    {# {{ form_widget(formNewType.type) }} #}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#parcoursIndexBackdrop">Retour</button>
+                                <button type="submit" class="btn btn-success" id="submitBtn">Enregistrer</button>
+                            </div>
+                        </div>
+                    {{ form_end(formNewParcour) }}
+                </div>
+            </div>
+            {% for parcour in parcours %}
+                <!-- Modal Index Services -->
+                <div class="modal fade" id="parcoursDeleteBackdrop{{ parcour.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Validation de suppression</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="alert alert-danger text-dark" role="alert">
+                                        Cette action est irréversible, lorsque tu cliquereras sur "<i>Valider la suppression</i>" ton élément de parcour sera définitivement supprimé du site ! 
+                                    </div>
+                                    <div class="alert alert-info text-dark" role="alert">
+                                        Pour supprimer l'élément de parcour, ré-écris son Titre à l'identique ({{ parcour.title }}) dans la case ci-dessous:
+                                        <input type="text" class="form-control" id="parcourverifdelete{{parcour.id}}" placeholder="{{ parcour.title }}">
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#typesIndexBackdrop">Retour</button>
+                                <form method="post" action="{{ path('app_main_parcour_delete', {'id': parcour.id}) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ parcour.id) }}">
+                                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Valider la suppression</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Récupérer l'email de l'utilisateur (passée depuis Twig)
+                        const parcourName = "{{ parcour.title }}";
+                        const parcourInput = document.getElementById('parcourverifdelete{{parcour.id}}');
+                        const deleteButton = document.querySelector('#parcoursDeleteBackdrop{{ parcour.id }} .btn-danger');
+
+                        // Désactiver le bouton "Valider la suppression" par défaut
+                        deleteButton.setAttribute('disabled', 'true');
+
+                        // Ajouter un écouteur d'événements pour détecter les changements dans le champ de saisie
+                        parcourInput.addEventListener('input', function () {
+                        if (parcourInput.value === parcourName) {
+                            // Activer le bouton si l'email correspond
+                            deleteButton.removeAttribute('disabled');
+                        } else {
+                            // Désactiver le bouton si l'email ne correspond pas
+                            deleteButton.setAttribute('disabled', 'true');
+                        }
+                        });
+                    });
+                </script>
+            {% endfor %}
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ################################################# Parcour ####################################### -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- Modal Index Services -->
+            <div class="modal fade" id="changePassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <form method='post'>
+                            {{ form_start(formPassword) }}
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Validation de suppression</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="alert alert-danger text-dark" role="alert">
+                                        Tu t'apprêtes à changer ton mot de passe. Pour vérifier que c'est bien ce que tu veux, renseigne ton mot de passe curent, puis ton nouveau mot de passe 2 fois.
+                                    </div>
+                                    {{ form_widget(formPassword.currentPassword) }}
+                                    {{ form_widget(formPassword.password) }}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#servicesIndexBackdrop">Retour</button>
+                                    <button type="submit" class="btn btn-success">Confirmer</button>
+                                </div>
+                            {{ form_end(formPassword) }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ################################################# Contact      ################################## -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <div class="modal fade" id="contactIndexBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Mes prises de contact</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            {% for contact in contacts %}
+                                <li class="list-group-item">{{ contact.name }}
+                                    <div class="text-end" >
+                                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#parcoursDeleteBackdrop{{ contact.id }}"><i class="fa-solid fa-trash-can"></i></button>
+                                        <a class="btn btn-outline-primary" href='{{ path('app_parcour_edit', {'id': contact.id}) }}'><i class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#adminModal">Retour</button>
+                        <button type="button" class="btn btn-success"data-bs-dismiss='modal' data-bs-toggle="modal" data-bs-target="#parcoursNewBackdrop"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+            <!-- ######################################## !Administration ######################################## -->
+            <!-- ################################################################################################# -->
+            <!-- ################################################################################################# -->
+        {% endif %}
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; Le Phare De L'Âme </div>
+                    <div class="col-lg-4 my-3 my-lg-0"></div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Politique de confidentialité</a>
+                        <a class="link-dark text-decoration-none" href="#!">Conditions d'utilisation</a>
+                    </div>
+                </div>
+            </div>
+        </footer>        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="res/js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
+{% endblock %}
